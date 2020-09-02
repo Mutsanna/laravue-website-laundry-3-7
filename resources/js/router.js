@@ -8,6 +8,11 @@ import DataOutlet from './pages/outlets/Outlet.vue'
 import AddOutlet from './pages/outlets/Add.vue'
 import EditOutlet from './pages/outlets/Edit.vue'
 
+import IndexCourier from './pages/couriers/Index.vue'
+import DataCourier from './pages/couriers/Courier.vue'
+import AddCouriers from './pages/couriers/Add.vue'
+import EditCouriers from './pages/couriers/Edit.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -27,6 +32,7 @@ const router = new Router({
         {
             path: '/outlets',
             component: IndexOutlet,
+            meta: { requiresAuth: true }, //CUKUP TAMBAHKAN CODE INI
             children: [
                 {
                     path: '',
@@ -46,6 +52,32 @@ const router = new Router({
                     component: EditOutlet,
                     meta: { title: 'Edit Outlet' }
                 }
+            ]
+        },
+        {
+            path: '/couriers',
+            component: IndexCourier,
+            meta: { requiresAuth: true },
+            children: [
+                {
+                    path: '',
+                    name: 'couriers.data',
+                    component: DataCourier,
+                    meta: { title: 'Manage Couriers' }
+                },
+                {
+                    path: 'add',
+                    name: 'couriers.add',
+                    component: AddCouriers,
+                    meta: { title: 'Add New Courier' }
+                },
+                {
+                    path: 'edit/:id',
+                    name: 'couriers.edit',
+                    component: EditCouriers,
+                    meta: { title: 'Edit Courier' }
+                },
+            
             ]
         }
     ]
